@@ -1,4 +1,4 @@
-@extends('index');
+@extends('index')
 
 
 @section('content')
@@ -6,13 +6,16 @@
         <h1 class="h2">Produtos</h1>
     </div>
     <div>
-        <form action="" method="get">
-            <input type="text", name="pesquisar" placeholder="Digite o nome">
-            <button>Pesquisar</button>
-            <a type="button" href="" class="btn btn-success float-end">Include Product</a>
+        <form action="{{ route('products.index') }}" method="get">
+            <input type="text", name="search" placeholder="Digite o nome">
+            <button>Search</button>
+            <a type="button" href="" class="btn btn-success float-end btn-sm">Include Product</a>
         </form>
 
         <div class="table-responsive small">
+            @if ($findProduct->isEmpty())
+                <p>No data found</p>
+            @else
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
@@ -28,12 +31,14 @@
                         <td>{{ 'R$' .  '' . number_format($product->price, 2, ',', '.') }}</td>
                         <td>
                             <a href="" class="btn btn-light btn-sm">Edit</a>
-                            <a href="" class="btn btn-danger btn-sm">Delete</a>
+                            <meta name="csrf-token" content="{{ csrf_token() }}">
+                            <a onclick="deletePagingRegistry('{{ route('products.delete') }}', {{ $product->id }})" class="btn btn-danger btn-sm">Delete</a>
                         </td>
                     </tr>
                 @endforeach
               </tbody>
             </table>
+            @endif
           </div>
     </div>
 @endsection
