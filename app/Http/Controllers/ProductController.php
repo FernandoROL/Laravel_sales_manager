@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormRequestProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -25,23 +26,13 @@ class ProductController extends Controller
         return response()->json(['success' => true]);    
     }
     
-    public function registerProduct(Request $request) {
+    public function registerProduct(FormRequestProduct $request) {
         if ($request->method() == 'POST') {
-            if($request->price !='' && $request->name !='') {
-                if (is_numeric($request->price)) {
-                    $data = $request->all();
-                    Product::create($data);
+            $data = $request->all();
+            Product::create($data);
 
-                    return redirect()->route('products.index');
-                } else {
-                    echo '<script>alert("Price field is invalid!")</script>';
-                }
-            } else {
-                echo '<script>alert("Fill in all fields!")</script>';
-            }
+            return redirect()->route('products.index');
         }
-
         return view('pages.products.create');
     }
-
 }

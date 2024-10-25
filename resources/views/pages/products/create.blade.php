@@ -8,11 +8,17 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+            @if ($errors->has('name'))
+              <div class="invalid-feedback"> {{$errors->first('name')}} </div>
+            @endif
           </div>
           <div class="mb-3">
             <label class="form-label">Price</label>
-            <input class="form-control" name="price">
+            <input class="form-control  @error('price') is-invalid @enderror" name="price">
+            @if ($errors->has('price'))
+              <div class="invalid-feedback"> {{$errors->first('price')}} </div>
+            @endif
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>        
     </form>

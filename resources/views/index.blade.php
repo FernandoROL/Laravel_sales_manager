@@ -148,6 +148,9 @@
 <script src="/js/color-modes.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
+{{-- InputMask --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
 {{-- BlocUI loading --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.js"></script>
 
