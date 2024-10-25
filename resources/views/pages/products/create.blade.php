@@ -8,14 +8,14 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+            <input type="text" value="{{ @old('name') }}" class="form-control @error('name') is-invalid @enderror" name="name">
             @if ($errors->has('name'))
               <div class="invalid-feedback"> {{$errors->first('name')}} </div>
             @endif
           </div>
           <div class="mb-3">
             <label class="form-label">Price</label>
-            <input class="form-control  @error('price') is-invalid @enderror" name="price">
+            <input id="money" value="{{ @old('price') }}" class="form-control  @error('price') is-invalid @enderror" name="price">
             @if ($errors->has('price'))
               <div class="invalid-feedback"> {{$errors->first('price')}} </div>
             @endif

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Brian2694\Toastr\Facades\Toastr;
+use App\Models\Components;
 use App\Http\Requests\FormRequestProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -29,10 +31,30 @@ class ProductController extends Controller
     public function registerProduct(FormRequestProduct $request) {
         if ($request->method() == 'POST') {
             $data = $request->all();
+            $components = new Components();
+            $data['price'] = $components->formatacaoMascaraDinheiroDecimal($data['price']);
             Product::create($data);
-
+            
+            Toastr::success('Success');
             return redirect()->route('products.index');
         }
         return view('pages.products.create');
+    }
+
+    public function updateProduct(FormRequestProduct $request, $id) {
+        if ($request->method() == 'PUT') {
+            $data = $request->all();
+            $components = new Components();
+            $data['price'] = $components->formatacaoMascaraDinheiroDecimal($data['price']);
+
+            $searchRegistry = Product::find($id);
+            $searchRegistry->update($data);
+
+            return redirect()->route('products.index');
+        }
+
+        $findProduct = Product::where('id', '=', $id)->first();
+
+        return view('pages.products.update', compact('findProduct'));
     }
 }

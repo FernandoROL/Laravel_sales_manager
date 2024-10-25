@@ -26,3 +26,5 @@ async function deletePagingRegistry(routeUrl, registryID) {
         });
     }
 }
+
+$('#money').mask('#.##0,00', {reverse: true});

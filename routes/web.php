@@ -20,8 +20,14 @@ Route::get('/', function () {
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
+
+    // Product creation routes
     Route::get('/registerProduct', [ProductController::class, 'registerProduct'])->name('register.product');
     Route::post('/registerProduct', [ProductController::class, 'registerProduct'])->name('register.product');
+
+    // Product update routes
+    Route::get('/updateProduct/{id}', [ProductController::class, 'updateProduct'])->name('update.product');
+    Route::put('/updateProduct/{id}', [ProductController::class, 'updateProduct'])->name('update.product');
 
     Route::delete('/delete', [ProductController::class, 'delete'])->name('products.delete');
 });

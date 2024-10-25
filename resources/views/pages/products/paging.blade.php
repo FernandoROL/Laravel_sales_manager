@@ -30,7 +30,7 @@
                         <td>{{ $product->name }}</td>
                         <td>{{ 'R$' .  '' . number_format($product->price, 2, ',', '.') }}</td>
                         <td>
-                            <a href="" class="btn btn-light btn-sm">Edit</a>
+                            <a href=" {{ route('update.product', $product->id )}}" class="btn btn-light btn-sm">Edit</a>
                             <meta name="csrf-token" content="{{ csrf_token() }}">
                             <a onclick="deletePagingRegistry('{{ route('products.delete') }}', {{ $product->id }})" class="btn btn-danger btn-sm">Delete</a>
                         </td>
