@@ -9,7 +9,7 @@
         <form action="{{ route('products.index') }}" method="get">
             <input type="text", name="search" placeholder="Digite o nome">
             <button>Search</button>
-            <a type="button" href="" class="btn btn-success float-end btn-sm">Include Product</a>
+            <a type="button" href="{{ route('register.product') }}" class="btn btn-success float-end btn-sm">Add Product</a>
         </form>
 
         <div class="table-responsive small">
