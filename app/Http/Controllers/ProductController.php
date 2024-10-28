@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Brian2694\Toastr\Facades\Toastr;
-use App\Models\Components;
 use App\Http\Requests\FormRequestProduct;
+use App\Models\Components;
 use App\Models\Product;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller 
@@ -35,9 +35,11 @@ class ProductController extends Controller
             $data['price'] = $components->formatacaoMascaraDinheiroDecimal($data['price']);
             Product::create($data);
             
-            Toastr::success('Success');
+            // Toastr::success('Product successfully added');
+
             return redirect()->route('products.index');
         }
+
         return view('pages.products.create');
     }
 
