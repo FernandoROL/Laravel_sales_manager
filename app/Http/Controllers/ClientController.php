@@ -28,28 +28,22 @@ class ClientController extends Controller
         return response()->json(['success' => true]);    
     }
     
-    public function registerClient(Request $request) {
+    public function registerClient(FormRequestClient $request) {
         if ($request->method() == 'POST') {
             $data = $request->all();
-            $components = new Components();
-            $data['price'] = $components->formatacaoMascaraDinheiroDecimal($data['price']);
             Client::create($data);
-            
-            // Toastr::success('Client successfully added');
+
+            Toastr::success('Client added successfully', 'Success!');
 
             return redirect()->route('clients.index');
         }
-
         return view('pages.clients.create');
     }
 
-    public function updateClient(Request $request, $id) {
+    public function updateClient(FormRequestClient $request, $id) {
         if ($request->method() == 'PUT') {
             $data = $request->all();
-            $components = new Components();
-            $data['price'] = $components->formatacaoMascaraDinheiroDecimal($data['price']);
-
-            $searchRegistry = Client::find($id);
+            $searchRegistry = Client::find(id: $id);
             $searchRegistry->update($data);
 
             return redirect()->route('clients.index');

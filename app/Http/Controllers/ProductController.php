@@ -35,7 +35,7 @@ class ProductController extends Controller
             $data['price'] = $components->formatacaoMascaraDinheiroDecimal($data['price']);
             Product::create($data);
             
-            // Toastr::success('Product successfully added');
+            // Toastr::success('Product successfully added', 'Success!');
 
             return redirect()->route('products.index');
         }

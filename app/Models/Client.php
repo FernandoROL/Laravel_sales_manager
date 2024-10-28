@@ -21,8 +21,8 @@ class Client extends Model
     public function getClientSearchIndex(string $search = '') {
         $client = $this->where(function ($query) use ($search){
             if ($search) {
-                $query->where('name', $search);
-                $query->orWhere('name', 'like','%'. $search .'%');
+                $query->where('email', $search);
+                $query->orWhere('email', 'like','%'. $search .'%');
             }
         })->get();
 

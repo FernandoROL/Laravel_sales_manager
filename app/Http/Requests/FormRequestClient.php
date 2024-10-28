@@ -18,11 +18,6 @@ class FormRequestClient extends FormRequest
         if ($this->method() == "POST" || $this->method() == "PUT") {
             $request = [
                 "name" => 'required',
-                "email" => 'required',
-                "adress" => 'required',
-                "public-place" => 'required',
-                "zip-code" => 'required',
-                "neighborhood" => 'required',
             ];
         }
         return $request;

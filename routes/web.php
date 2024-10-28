@@ -36,11 +36,11 @@ Route::prefix('products')->group(function () {
 Route::prefix('clients')->group(function () {
     Route::get('/', [ClientController::class, 'index'])->name('clients.index');
 
-    // Product creation routes
+    // Client creation routes
     Route::get('/registerClient', [ClientController::class, 'registerClient'])->name('register.client');
     Route::post('/registerClient', [ClientController::class, 'registerClient'])->name('register.client');
 
-    // Product update routes
+    // Client update routes
     Route::get('/updateClient/{id}', [ClientController::class, 'updateClient'])->name('update.client');
     Route::put('/updateClient/{id}', [ClientController::class, 'updateClient'])->name('update.client');
 
