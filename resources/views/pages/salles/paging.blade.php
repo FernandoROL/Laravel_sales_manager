@@ -32,7 +32,7 @@
                         <td>{{ $salle->client->name }}</td>
                         <td>{{ $salle->product->name }}</td>
                         <td>
-                          <a type="button" class="btn btn-light btn-sm">Teste</a>
+                          <a href="{{ route('SendEmailRecipt.salle', $salle->id) }}" type="button" class="btn btn-light btn-sm">Teste</a>
                         </td>
                     </tr>
                 @endforeach

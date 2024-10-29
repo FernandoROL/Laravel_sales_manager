@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
@@ -16,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::prefix(prefix: 'dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
 Route::prefix('products')->group(function () {
@@ -54,4 +55,6 @@ Route::prefix('salles')->group(function () {
     // Client creation routes
     Route::get('/registerSalle', [SalleController::class, 'registerSalle'])->name('register.salle');
     Route::post('/registerSalle', [SalleController::class, 'registerSalle'])->name('register.salle');
+
+    Route::get('/SendEmailRecipt/{id}', [SalleController::class, 'SendEmailRecipt'])->name('SendEmailRecipt.salle');
 });
