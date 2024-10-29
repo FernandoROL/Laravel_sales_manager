@@ -33,7 +33,7 @@ class ClientController extends Controller
             $data = $request->all();
             Client::create($data);
 
-            Toastr::success('Client added successfully', 'Success!');
+            Toastr::success('Client added successfully');
 
             return redirect()->route('clients.index');
         }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SalleController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -45,4 +46,12 @@ Route::prefix('clients')->group(function () {
     Route::put('/updateClient/{id}', [ClientController::class, 'updateClient'])->name('update.client');
 
     Route::delete('/delete', [ClientController::class, 'delete'])->name('clients.delete');
+});
+
+Route::prefix('salles')->group(function () {
+    Route::get('/', [SalleController::class, 'index'])->name('salles.index');
+
+    // Client creation routes
+    Route::get('/registerSalle', [SalleController::class, 'registerSalle'])->name('register.salle');
+    Route::post('/registerSalle', [SalleController::class, 'registerSalle'])->name('register.salle');
 });

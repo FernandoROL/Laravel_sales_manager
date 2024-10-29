@@ -1,4 +1,4 @@
-<div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+<div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary vh-100">
     <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="sidebarMenuLabel">Management</h5>
@@ -22,6 +22,12 @@
             <a class="nav-link d-flex align-items-center gap-2" href="{{ route('products.index') }}">
               <svg class="bi"><use xlink:href="#cart"/></svg>
               Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2" href="{{ route('salles.index') }}">
+              <svg class="bi"><use xlink:href="#file-earmark"/></svg>
+              Sales
             </a>
           </li>
         </ul>
