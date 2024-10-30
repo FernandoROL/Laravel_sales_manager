@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix(prefix: 'dashboard')->group(function () {
+Route::prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
@@ -57,4 +58,18 @@ Route::prefix('salles')->group(function () {
     Route::post('/registerSalle', [SalleController::class, 'registerSalle'])->name('register.salle');
 
     Route::get('/SendEmailRecipt/{id}', [SalleController::class, 'SendEmailRecipt'])->name('SendEmailRecipt.salle');
+});
+
+Route::prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('users.index');
+
+    // User  creation routes
+    Route::get('/registerUser', [UserController::class, 'registerUser'])->name('register.user');
+    Route::post('/registerUser', [UserController::class, 'registerUser'])->name('register.user');
+
+    // User update routes
+    Route::get('/updateUser/{id}', [UserController::class, 'updateUser'])->name('update.user');
+    Route::put('/updateUser/{id}', [UserController::class, 'updateUser'])->name('update.user');
+
+    Route::delete('/delete', [UserController::class, 'delete'])->name('users.delete');
 });

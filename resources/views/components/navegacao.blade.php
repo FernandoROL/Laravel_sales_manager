@@ -30,6 +30,12 @@
               Sales
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2" href="{{ route('users.index') }}">
+              <svg class="bi"><use xlink:href="#file-earmark"/></svg>
+              Users
+            </a>
+          </li>
         </ul>
 
         <hr class="my-3">
