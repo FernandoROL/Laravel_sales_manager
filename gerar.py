@@ -32,7 +32,7 @@ def command(*args):
 def git(*args):
     return command("git", *args)
 def api(path):
-    return command("gh", "api", "repos/" + REPO + "/" + path)
+    return command("gh", "api", "--allow-escape-sequences", "repos/" + REPO + "/" + path)
 def json_api(path):
     return json.loads(api(path))
 
@@ -200,3 +200,16 @@ with zipfile.ZipFile(OUT/"Codigo-e-Evidencias-Docker.zip") as z:
     assert "projeto/artisan" in z.namelist()
     assert z.read("projeto/composer.lock")==git("show",after+":composer.lock")
 print("PDFs, referências, escopo, dados de origem e integridade do ZIP verificados.")
+
+if shutil.which("pdftoppm"):
+    from base64 import b64encode
+    thumbs = []
+    for name,n in [("Apresentacao-Seguranca-Docker.pdf",2),("Apresentacao-Seguranca-Docker.pdf",5),("Reportagem-Seguranca-Docker.pdf",2),("Reportagem-Seguranca-Docker.pdf",3)]:
+        target=Path(os.environ["RUNNER_TEMP"])/("pagina-"+str(len(thumbs)))
+        command("pdftoppm","-f",str(n),"-l",str(n),"-singlefile","-scale-to","400","-png",str(OUT/name),str(target))
+        thumbs.append(Image.open(str(target)+".png").convert("RGB"))
+    sheet = Image.new("RGB",(810,644),"#dadee0")
+    for n,im in enumerate(thumbs):
+        sheet.paste(im,((n%2)*405,(n//2)*238))
+    buffer=io.BytesIO();sheet.save(buffer,format="JPEG",quality=72)
+    print("PREVIA_PDF="+b64encode(buffer.getvalue()).decode())
