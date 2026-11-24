@@ -1,70 +1,59 @@
 @extends('index')
 
 @section('content')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-    </div>
-    <div class="row d-flex gap-5 px-5">
-        <div class="card mb-5" style="width: 18rem;">
-            <img src="images/mm.png" class="card-img-top mt-3" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Clients</h5>
-                <p class="card-text">Clients page stats:</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Client count: {{ $totalClients }}</li>
-                <li class="list-group-item">Last client: {{ $lastClient }}</li>
-            </ul>
-            <div class="card-body">
-                <a href="{{ route('clients.index') }}" class="card-link">Clients page</a>
-            </div>
+<section class="sales-overview">
+    <header class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <h1>Painel de vendas</h1>
+            <p class="period mb-0">{{ ucfirst($monthLabel) }}</p>
         </div>
+        <a href="{{ route('register.salle') }}" class="btn btn-success">Registrar venda</a>
+    </header>
 
-        <div class="card mb-5" style="width: 18rem;">
-            <img src="images/mm.png" class="card-img-top mt-3" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Products</h5>
-                <p class="card-text">Products page stats:</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Product count: {{ $totalProducts }}</li>
-                <li class="list-group-item">Highest price: {{ 'R$' . '' . number_format($highestValueProduct, 2, ',', '.') }}
-                </li>
-                <li class="list-group-item">Average price: {{ 'R$' . '' . number_format($productMean, 2, ',', '.') }}</li>
-            </ul>
-            <div class="card-body">
-                <a href="{{ route('products.index') }}" class="card-link">Products page</a>
-            </div>
-        </div>
-        <div class="card mb-5" style="width: 18rem;">
-            <img src="images/mm.png" class="card-img-top mt-3" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Sales</h5>
-                <p class="card-text">Sales page stats:</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Sales made: {{ $totalSales }}</li>
-                <li class="list-group-item">Last sale number: {{ $lastSale }}</li>
-                <li class="list-group-item">Most sold: {{ $mostSold }}</li>
-            </ul>
-            <div class="card-body">
-                <a href="{{ route('salles.index') }}" class="card-link">Sales page</a>
-            </div>
-        </div>
+    <dl class="sales-stats">
+        <div><dt>Vendas no mês</dt><dd>{{ $summary->sales }}</dd></div>
+        <div><dt>Clientes que compraram no mês</dt><dd>{{ $summary->buyers }}</dd></div>
+        <div><dt>Vendas desde o início</dt><dd>{{ $totalSales }}</dd></div>
+    </dl>
 
-        <div class="card mb-5" style="width: 18rem;">
-            <img src="images/mm.png" class="card-img-top mt-3" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Users</h5>
-                <p class="card-text">Users page stats:</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">User count: {{ $totalUsers }}</li>
-                <li class="list-group-item">Last registered: {{ $lastRegistered }}</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Users page</a>
-            </div>
-        </div>
+    <div class="sales-panels">
+        <section class="sales-panel">
+            <header><h2>Vendas recentes</h2><a href="{{ route('salles.index') }}">Ver todas</a></header>
+            @if ($recentSales->isEmpty())
+                <p>Nenhuma venda registrada. Para começar, cadastre um
+                    <a href="{{ route('register.client') }}">cliente</a> e um
+                    <a href="{{ route('register.product') }}">produto</a>.</p>
+            @else
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead><tr><th scope="col">Venda</th><th scope="col">Cliente</th><th scope="col">Produto</th><th scope="col">Data</th></tr></thead>
+                        <tbody>
+                        @foreach ($recentSales as $sale)
+                            <tr>
+                                <th scope="row">#{{ $sale->salleNumber }}</th>
+                                <td>{{ $sale->client?->name ?? 'Cliente indisponível' }}</td>
+                                <td>{{ $sale->product?->name ?? 'Produto indisponível' }}</td>
+                                <td class="text-nowrap">{{ $sale->created_at?->format('d/m/Y') ?? '—' }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </section>
+        <section class="sales-panel">
+            <header><h2>Mais vendidos no mês</h2></header>
+            @if ($topProducts->isEmpty())
+                <p>Nenhum produto vendido neste mês.</p>
+            @else
+                <ol class="product-ranking">
+                    @foreach ($topProducts as $entry)
+                        <li><span>{{ $entry->product?->name ?? 'Produto indisponível' }}</span>
+                            <strong>{{ $entry->sales }} {{ $entry->sales == 1 ? 'venda' : 'vendas' }}</strong></li>
+                    @endforeach
+                </ol>
+            @endif
+        </section>
     </div>
+</section>
 @endsection

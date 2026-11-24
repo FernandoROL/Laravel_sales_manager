@@ -1,0 +1,35 @@
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")/.."
+docker compose version >/dev/null
+export LOCAL_UID="$(id -u)" LOCAL_GID="$(id -g)"
+
+if [ ! -f .env ]; then
+    if [ -d .docker/mysql/dbdata/mysql ]; then
+        echo 'Banco MySQL antigo encontrado. Restaure o .env original antes de iniciar.' >&2
+        exit 1
+    fi
+    umask 077
+    password=$(od -An -N24 -tx1 /dev/urandom | tr -d ' \n')
+    tmp=$(mktemp .env.setup.XXXXXX)
+    trap 'rm -f "$tmp"' EXIT
+    sed "s/^DB_PASSWORD=$/DB_PASSWORD=$password/" .env.example > "$tmp"
+    ln "$tmp" .env
+    rm -f "$tmp"
+    trap - EXIT
+    umask 022
+fi
+
+if [ -d .docker/mysql/dbdata/mysql ]; then
+    # Compose interpolation also reads these choices for later stop/start commands.
+    if ! grep -q '^MYSQL_DATA_LOCATION=' .env; then
+        printf '\nMYSQL_DATA_LOCATION=./.docker/mysql/dbdata\n' >> .env
+    fi
+    if ! grep -q '^MYSQL_IMAGE=' .env; then
+        printf '\nMYSQL_IMAGE=mysql:5.7.22\n' >> .env
+    fi
+fi
+
+docker compose up --build -d --wait
+address=$(docker compose port nginx 80)
+printf '\nSales Manager disponível em http://%s/dashboard\n' "$address"

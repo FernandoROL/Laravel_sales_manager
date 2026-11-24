@@ -2,69 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Salles;
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Models\Client;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        $totalClients = $this->searchClients()[0];
-        $lastClient = $this->searchClients()[1];
+        $start = now()->startOfMonth();
+        $monthly = Salles::query()
+            ->where('created_at', '>=', $start)
+            ->where('created_at', '<', $start->copy()->addMonth());
 
-        $totalProducts = $this->searchProduct()[0];
-        $highestValueProduct = $this->searchProduct()[1];
-        $productMean = $this->searchProduct()[2];
+        $summary = (clone $monthly)
+            ->selectRaw('COUNT(*) AS sales, COUNT(DISTINCT clientId) AS buyers')
+            ->first();
 
-        $totalSales = $this->searchSales()[0];
-        $lastSale = $this->searchSales()[1];
-        $mostSold = $this->searchSales()[2];
-
-        $totalUsers = $this->searchUsers()[0];
-        $lastRegistered = $this->searchUsers()[1];
-
-        return view("pages.dashboard.dashboard", compact('totalClients', 'lastClient', 'totalProducts', 'highestValueProduct', 'productMean', 'totalSales', 'lastSale', 'mostSold', 'totalUsers', 'lastRegistered'));
-    }
-
-    public function searchClients()
-    {
-        $totalClients = Client::all()->count();
-        $lastClient = Client::orderBy('created_at', 'desc')->first()['name'];
-
-        return [$totalClients, $lastClient];
-    }
-
-    public function searchProduct()
-    {
-        $totalProducts = Product::all()->count();
-        $highestValueProduct = Product::max('price');
-        $productMean = Product::sum('price') / $totalProducts;
-
-        return [$totalProducts, $highestValueProduct, $productMean];
-    }
-
-    public function searchSales()
-    {
-        $totalSales = Salles::all()->count();
-        $lastSale = Salles::orderBy('created_at', 'desc')->first()['salleNumber'];
-        $mostPopular = Salles::select('productId')
+        $topProducts = (clone $monthly)
+            ->select('productId')
+            ->selectRaw('COUNT(*) AS sales')
+            ->with('product:id,name')
             ->groupBy('productId')
-            ->orderByRaw('COUNT(*) DESC')
-            ->limit(1)
-            ->value('productId');
-        $sale = Product::find($mostPopular)->name;
+            ->orderByDesc('sales')
+            ->orderBy('productId')
+            ->limit(3)
+            ->get();
 
-        return [$totalSales, $lastSale, $sale];
-    }
+        $recentSales = Salles::with(['client:id,name', 'product:id,name'])
+            ->latest('created_at')->orderByDesc('id')->limit(5)->get();
 
-    public function searchUsers()
-    {
-        $totalUsers = User::all()->count();
-        $lastRegistered = User::orderBy('created_at', 'desc')->first()['name'];
-
-        return [$totalUsers, $lastRegistered];
+        return view('pages.dashboard.dashboard', [
+            'totalSales' => Salles::count(),
+            'summary' => $summary,
+            'monthLabel' => $start->locale('pt_BR')->translatedFormat('F \\d\\e Y'),
+            'topProducts' => $topProducts,
+            'recentSales' => $recentSales,
+        ]);
     }
 }

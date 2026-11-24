@@ -1,103 +1,36 @@
-# Sales management system
+# Laravel Sales Manager
 
-System I made as a part of a Laravel course at Udemy
+Sistema de gestão de vendas desenvolvido durante um curso de Laravel. Permite cadastrar clientes e produtos, registrar vendas e emitir recibos.
 
-## Features
+## Iniciar localmente
 
-- Poduct, Client, User CRUDs
-- Sales creation and email receipt 
-- Dashboard with information about each table
+Requisitos: Git, Docker com Compose v2 que aceite `up --wait` e um terminal POSIX (Linux, macOS ou WSL). Na pasta do projeto:
 
-## Tecnologies 
+```sh
+sh bin/setup
+```
 
-- PHP 8.1
-- Laravel 10.48.22
-- Docker
-- MySQL
-- JavaScript
-- Bootstrap
+Abra [o dashboard](http://localhost:8989/dashboard). O comando cria o `.env` e uma senha local no primeiro uso, aguarda o MySQL, instala as dependências do `composer.lock`, gera a chave Laravel se necessário e aplica as migrações. A primeira compilação precisa de internet. O painel funciona com o banco vazio. Ao editar PHP, Blade ou CSS, recarregue a página.
 
-## Installation
+### Uso diário
 
-### Requirements
-- Docker
-- Git 
+| Tarefa | Comando |
+| --- | --- |
+| Parar, preservando os dados | `docker compose down` |
+| Iniciar novamente | `sh bin/setup` |
+| Ver por que a inicialização falhou | `docker compose logs --tail=100 sistema_gestao mysql` |
+| Criar uma venda fictícia de demonstração | `docker compose exec sistema_gestao php artisan db:seed` |
+| Executar os testes em SQLite em memória | `docker compose exec sistema_gestao php artisan test` |
+| Abrir phpMyAdmin opcional em localhost:8899 | `docker compose --profile tools up -d phpmyadmin` |
 
+O serviço de e-mail padrão grava os recibos em `storage/logs/laravel.log`. Para mudar a porta do site, ajuste `APP_PORT` e `APP_URL` no `.env` e execute a inicialização novamente. O MySQL fica na rede interna do Compose. No phpMyAdmin, use as credenciais do `.env`.
 
-### Setting up and running
-1. Clone the repository
+### Instalações anteriores
 
-    - Navigate to a place you would like to clone the repository
+Mantenha o `.env` original, incluindo `APP_KEY` e as credenciais do banco. Se o diretório `.docker/mysql/dbdata/mysql` estiver presente, o inicializador seleciona o diretório e a imagem MySQL 5.7.22 usados pelo projeto antigo. Para migrar ao MySQL 8.4, faça uma exportação lógica e importe em um volume novo. Apontar uma versão nova do servidor diretamente para os arquivos antigos pode danificá-los.
 
-    ```sh
-    git clone https://github.com/FernandoROL/Laravel_sales_manager.git
-    ```
+Instalações novas usam um volume Docker chamado `sales_db` (com prefixo do projeto Compose). Arquivos de banco, dumps e configurações locais ficam fora do Git. Se o `.env` tiver sido copiado à mão, defina `DB_PASSWORD` antes de iniciar. Para um volume novo, use um usuário de aplicação, como `sales_app`.
 
+### Dashboard
 
-2. Make sure you are operating from inside the repository
-    ```sh
-    cd ~/{path-to-repository}/Laravel_sales_manager
-    ```
-
-
-3. Create a `.env` file with the `.env.example` and adjust it to your liking
-
-    - Copy and rename the `.env.example` to `.env` by hand and edit to your liking
-
-        + or
-
-    - Run the command to do it for you
-        ```sh
-        cp .env.example .env
-        ```
-
-
-4. Run the image using `docker-compose`
-
-    ```sh
-    docker compose up -d
-    ```
-
-
-5. Get inside the docker container 
-
-    ```sh
-    docker compose exec -it sistema_gestao bash
-    ```
-    `sistema_gestao` is the current container name and can be changed
-
-
-6. Install the dependencies 
-
-    ```sh
-    composer install
-    ```
-
-
-7. Generate your `app_key`
-
-    ```sh
-    php artisan key:generate
-    ```
-
-
-8. Run the migrations for the database 
-
-    ```sh
-    php artisan migrate
-    ```
-
-
-9. OPTIONAL - Seed the database to populate with fictional data
-
-    ```sh
-    php artisan db:seed
-    ```
-
-
-### Running the app
-
-- Follow the links below:
-
-    - Main application: http://localhost:8989/
-    - phpMyAdmin database: http://localhost:8899/
+A página inicial mostra vendas totais, vendas e clientes compradores no mês, as cinco vendas mais recentes e os três produtos com mais vendas no mês. Cada venda registrada representa um produto. O modelo atual guarda a referência ao produto e não registra o preço praticado no momento da venda.

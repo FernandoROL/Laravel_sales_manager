@@ -1,0 +1,34 @@
+name: Instalação local
+on: [push, workflow_dispatch]
+permissions:
+  contents: read
+
+jobs:
+  compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Subir o projeto a partir de um clone limpo
+        run: |
+          sh bin/setup
+          curl -fsSL --retry 6 --retry-connrefused http://localhost:8989/ -o /tmp/dashboard
+          grep -q 'Nenhuma venda registrada' /tmp/dashboard
+      - name: Testar o dashboard e a persistência após reiniciar
+        run: |
+          docker compose exec -T sistema_gestao php artisan test
+          docker compose exec -T sistema_gestao php artisan db:seed
+          docker compose exec -T sistema_gestao php artisan db:seed
+          cp .env /tmp/sales-env
+          docker compose down
+          sh bin/setup
+          cmp .env /tmp/sales-env
+          curl -fsSL --retry 6 --retry-connrefused http://localhost:8989/dashboard -o /tmp/dashboard
+          grep -q 'Caderno de demonstração' /tmp/dashboard
+          grep -q '#1</th>' /tmp/dashboard
+          if grep -q '#2</th>' /tmp/dashboard; then exit 1; fi
+      - name: Diagnóstico da inicialização
+        if: failure()
+        run: |
+          docker compose ps -a
+          docker compose logs --tail=100 sistema_gestao nginx

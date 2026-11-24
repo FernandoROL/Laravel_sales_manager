@@ -1,0 +1,7 @@
+*
+!Dockerfile
+!docker/
+docker/*
+!docker/php/
+docker/php/*
+!docker/php/custom.ini

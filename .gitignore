@@ -4,7 +4,8 @@ node_modules/
 public/storage
 storage/*.key
 .env
-.env.*.backup
+.env.*
+!.env.example
 
 # Laravel cached files
 bootstrap/cache/*.php
@@ -25,7 +26,6 @@ bootstrap/cache/*.php
 *.opt
 *.TRN
 *.CSM
-*.CSV
 
 # MySQL log and configuration files
 ibdata*
@@ -43,3 +43,12 @@ Thumbs.db
 *.tmp
 *.bak
 *.swp
+
+# Local database files and exports
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sql
+*.sql.gz
+*.dump
+.phpunit.result.cache
