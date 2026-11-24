@@ -58,7 +58,7 @@ Route::prefix('salles')->group(function () {
     Route::get('/registerSalle', [SalleController::class, 'registerSalle'])->name('register.salle');
     Route::post('/registerSalle', [SalleController::class, 'registerSalle'])->name('register.salle');
 
-    Route::get('/SendEmailRecipt/{id}', [SalleController::class, 'SendEmailRecipt'])->name('SendEmailRecipt.salle');
+    Route::post('/SendEmailRecipt/{id}', [SalleController::class, 'SendEmailRecipt'])->name('SendEmailRecipt.salle');
 });
 
 Route::prefix('users')->group(function () {

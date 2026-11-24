@@ -32,7 +32,10 @@
                         <td>{{ $salle->client->name }}</td>
                         <td>{{ $salle->product->name }}</td>
                         <td>
-                          <a href="{{ route('SendEmailRecipt.salle', $salle->id) }}" type="button" class="btn btn-light btn-sm">Email Receipt</a>
+                          <form method="POST" action="{{ route('SendEmailRecipt.salle', $salle->id) }}">
+                              @csrf
+                              <button type="submit" class="btn btn-light btn-sm">Email Receipt</button>
+                          </form>
                         </td>
                     </tr>
                 @endforeach

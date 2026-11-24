@@ -29,6 +29,53 @@ jobs:
           grep -q 'Caderno de demonstração' /tmp/dashboard
           grep -q '#1</th>' /tmp/dashboard
           if grep -q '#2</th>' /tmp/dashboard; then exit 1; fi
+      - name: Conferir recibo na aplicação Docker
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from http.cookiejar import CookieJar
+          from urllib.error import HTTPError
+          from urllib.parse import urlencode, urlsplit
+          from urllib.request import HTTPCookieProcessor, build_opener
+
+          class ReceiptForm(HTMLParser):
+              action = token = None
+              in_receipt = False
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  if tag == 'form':
+                      target = urlsplit(attrs.get('action', '')).path
+                      self.in_receipt = target.startswith('/salles/SendEmailRecipt/') and attrs.get('method', '').lower() == 'post'
+                      if self.in_receipt:
+                          self.action = target
+                  if tag == 'input' and self.in_receipt and attrs.get('name') == '_token':
+                      self.token = attrs['value']
+
+              def handle_endtag(self, tag):
+                  if tag == 'form':
+                      self.in_receipt = False
+
+          base = 'http://localhost:8989'
+          browser = build_opener(HTTPCookieProcessor(CookieJar()))
+          form = ReceiptForm()
+          with browser.open(base + '/salles', timeout=15) as response:
+              form.feed(response.read().decode())
+          assert form.action and form.token, 'Formulário de recibo ausente'
+          for data, expected in [(None, 405), (b'', 419)]:
+              try:
+                  browser.open(base + form.action, data, timeout=15).close()
+              except HTTPError as error:
+                  assert error.code == expected
+                  print('GET' if data is None else 'POST sem token', '->', error.code)
+              else:
+                  raise AssertionError('A aplicação aceitou um método ou formulário inválido')
+          with browser.open(base + form.action, urlencode({'_token': form.token}).encode(), timeout=15) as response:
+              assert response.status == 200 and urlsplit(response.url).path == '/salles'
+              print('Formulário válido -> HTTP 200 na listagem de vendas')
+          PY
+          docker compose exec -T sistema_gestao grep -Fq 'Subject: Email Sale Recipt' storage/logs/laravel.log
+          echo 'Recibo confirmado no log do transporte de e-mail local.'
       - name: Diagnóstico
         if: failure()
         run: |
