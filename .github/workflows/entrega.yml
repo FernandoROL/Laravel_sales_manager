@@ -1,0 +1,71 @@
+name: Gerar entrega acadêmica
+on:
+  push:
+    branches: [entrega/seguranca-docker]
+    paths-ignore: ['arquivos/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  preparar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Capturar o painel da revisão corrigida
+        env:
+          APP_REV: 7883179b48f3d283fef8474121eb620d6e613a43
+        run: |
+          project="$RUNNER_TEMP/vendas-aplicacao"
+          mkdir -p "$project"
+          git archive "$APP_REV" | tar -x -C "$project"
+          echo "PROJECT_DIR=$project" >> "$GITHUB_ENV"
+          cd "$project"
+          docker compose up --build -d
+          docker compose exec -T sistema_gestao php artisan db:seed
+          curl -fsSL --retry 10 --retry-all-errors http://localhost:8989/dashboard -o "$RUNNER_TEMP/painel.html"
+          grep -q 'Caderno de demonstração' "$RUNNER_TEMP/painel.html"
+          google-chrome --headless --no-sandbox --disable-gpu --hide-scrollbars --window-size=1380,680 --virtual-time-budget=2500 --screenshot="$GITHUB_WORKSPACE/dashboard.png" http://localhost:8989/dashboard
+      - name: Conferir os artefatos e gerar os documentos
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 -m venv "$RUNNER_TEMP/relatorio-python"
+          "$RUNNER_TEMP/relatorio-python/bin/pip" -q install reportlab==4.4.3 pypdf==6.3.0 pillow==11.3.0
+          "$RUNNER_TEMP/relatorio-python/bin/python" gerar.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: entrega-verificada
+          path: arquivos/
+          if-no-files-found: error
+  disponibilizar:
+    needs: preparar
+    if: github.ref == 'refs/heads/entrega/seguranca-docker'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: entrega/seguranca-docker
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: entrega-verificada
+          path: arquivos/
+      - name: Publicar os três arquivos na branch de entrega
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -- arquivos/Apresentacao-Seguranca-Docker.pdf arquivos/Reportagem-Seguranca-Docker.pdf arquivos/Codigo-e-Evidencias-Docker.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "Disponibiliza a apresentação, a reportagem e o pacote de evidências"
+            git push origin HEAD:refs/heads/entrega/seguranca-docker
+          fi

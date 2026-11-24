@@ -1,0 +1,740 @@
+{
+  "original_sha256": "1f031b75e9f73fefb48c85242a656a39d8e8271ca28fe1a6491a2593a407e13b",
+  "commits": [
+    "71fd31df7fcf35b6a9afac09f4626f0381ae61a7",
+    "15b008a81c71379aa8b1e0479d888475d2cb6406",
+    "7883179b48f3d283fef8474121eb620d6e613a43"
+  ],
+  "scan_runs": [
+    45477800076,
+    45478091935,
+    45478321485
+  ],
+  "summaries": {
+    "original": "## SAST - Semgrep\n\n**Findings: 4**\n\n| Regra | Regra (Completa) | Severidade | Código | Descrição |\n| --- | --- | --- | --- | --- |\n| github-actions-mutable-action-tag | yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag | WARNING | `.github/workflows/scans.yml:21` | GitHub Actions step uses a mutable tag or branch reference. Tags and branch names can be silently repointed by the action owner, enabling su |\n| github-actions-mutable-action-tag | yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag | WARNING | `.github/workflows/scans.yml:89` | GitHub Actions step uses a mutable tag or branch reference. Tags and branch names can be silently repointed by the action owner, enabling su |\n| github-actions-mutable-action-tag | yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag | WARNING | `.github/workflows/scans.yml:98` | GitHub Actions step uses a mutable tag or branch reference. Tags and branch names can be silently repointed by the action owner, enabling su |\n| detected-bcrypt-hash | generic.secrets.security.detected-bcrypt-hash.detected-bcrypt-hash | ERROR | `database/factories/UserFactory.php:24` | bcrypt hash detected |\n\nOs achados precisam de triagem para classificação como verdadeiro ou falso positivo.\n\n## SCA - OSV-Scanner\n\n**Findings: 49**\n\n| Dependência | Versão | Vulnerabilidade | Versão corrigida (OSV) | Arquivo de origem |\n| --- | --- | --- | --- | --- |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-94pj-82f3-465w](https://osv.dev/vulnerability/GHSA-94pj-82f3-465w) | 7.14.2 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-cwxw-98qj-8qjx](https://osv.dev/vulnerability/GHSA-cwxw-98qj-8qjx) | 7.12.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-f283-ghqc-fg79](https://osv.dev/vulnerability/GHSA-f283-ghqc-fg79) | 7.15.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-f7vp-7xgx-4w4r](https://osv.dev/vulnerability/GHSA-f7vp-7xgx-4w4r) | 7.15.2, 8.0.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-g446-98w2-8p5w](https://osv.dev/vulnerability/GHSA-g446-98w2-8p5w) | 7.12.3 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-h95v-h523-3mw8](https://osv.dev/vulnerability/GHSA-h95v-h523-3mw8) | 7.15.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-v5mv-p594-2x33](https://osv.dev/vulnerability/GHSA-v5mv-p594-2x33) | 7.15.2, 8.0.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-wm3w-8rrp-j577](https://osv.dev/vulnerability/GHSA-wm3w-8rrp-j577) | 7.15.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-wpwq-4j6v-78m3](https://osv.dev/vulnerability/GHSA-wpwq-4j6v-78m3) | 7.12.1 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-34xg-wgjx-8xph](https://osv.dev/vulnerability/GHSA-34xg-wgjx-8xph) | 2.10.2 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-c2w2-prh8-qm98](https://osv.dev/vulnerability/GHSA-c2w2-prh8-qm98) | 2.12.3 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-hq7v-mx3g-29hw](https://osv.dev/vulnerability/GHSA-hq7v-mx3g-29hw) | 2.10.2 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-vm85-hxw5-5432](https://osv.dev/vulnerability/GHSA-vm85-hxw5-5432) | 2.12.1 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-5vg9-5847-vvmq](https://osv.dev/vulnerability/GHSA-5vg9-5847-vvmq) | 13.10.0, 12.60.0 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-63hm-g96r-2m2q](https://osv.dev/vulnerability/GHSA-63hm-g96r-2m2q) | 12.71.0, 13.40.0 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-crmm-hgp2-wgrp](https://osv.dev/vulnerability/GHSA-crmm-hgp2-wgrp) | 13.12.0, 12.61.1 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-f9x3-7vq9-cph6](https://osv.dev/vulnerability/GHSA-f9x3-7vq9-cph6) | 13.27.0, 12.68.0, 11.56.1 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-jh5r-qr3c-85q8](https://osv.dev/vulnerability/GHSA-jh5r-qr3c-85q8) | 12.69.0, 13.30.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-29pj-957v-52mc](https://osv.dev/vulnerability/GHSA-29pj-957v-52mc) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-2q4p-g7hv-5rgv](https://osv.dev/vulnerability/GHSA-2q4p-g7hv-5rgv) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-3527-qv2q-pfvx](https://osv.dev/vulnerability/GHSA-3527-qv2q-pfvx) | 2.7.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-3q6v-r5mr-hxv8](https://osv.dev/vulnerability/GHSA-3q6v-r5mr-hxv8) | 2.10.2 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-4v6x-c7xx-hw9f](https://osv.dev/vulnerability/GHSA-4v6x-c7xx-hw9f) | 2.8.1 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-8rr7-cvq3-gmfh](https://osv.dev/vulnerability/GHSA-8rr7-cvq3-gmfh) | 2.10.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-97jj-33gv-5xf9](https://osv.dev/vulnerability/GHSA-97jj-33gv-5xf9) | 2.10.2 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-g2gp-3wwq-f4ph](https://osv.dev/vulnerability/GHSA-g2gp-3wwq-f4ph) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-hh8v-hgvp-g3f5](https://osv.dev/vulnerability/GHSA-hh8v-hgvp-g3f5) | 2.8.2 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-j8pm-gj4c-rq4x](https://osv.dev/vulnerability/GHSA-j8pm-gj4c-rq4x) | 2.9.1 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-jfm3-95jq-q3rf](https://osv.dev/vulnerability/GHSA-jfm3-95jq-q3rf) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-jjv6-8j6v-6j52](https://osv.dev/vulnerability/GHSA-jjv6-8j6v-6j52) | 2.9.1 | `composer.lock` |\n\nExibidos 30 de 49 findings. Os demais estão no log do SCA.\n\nA versão corrigida é informada pelo OSV quando disponível. Verifique a compatibilidade antes de atualizar a dependência.\n",
+    "antes": "## SAST - Semgrep\n\n**Findings: 5**\n\n| Regra | Regra (Completa) | Severidade | Código | Descrição |\n| --- | --- | --- | --- | --- |\n| github-actions-mutable-action-tag | yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag | WARNING | `.github/workflows/scans.yml:21` | GitHub Actions step uses a mutable tag or branch reference. Tags and branch names can be silently repointed by the action owner, enabling su |\n| github-actions-mutable-action-tag | yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag | WARNING | `.github/workflows/scans.yml:97` | GitHub Actions step uses a mutable tag or branch reference. Tags and branch names can be silently repointed by the action owner, enabling su |\n| github-actions-mutable-action-tag | yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag | WARNING | `.github/workflows/scans.yml:106` | GitHub Actions step uses a mutable tag or branch reference. Tags and branch names can be silently repointed by the action owner, enabling su |\n| detected-bcrypt-hash | generic.secrets.security.detected-bcrypt-hash.detected-bcrypt-hash | ERROR | `database/factories/UserFactory.php:24` | bcrypt hash detected |\n| laravel-recibo-enviado-por-get | github.semgrep.laravel-recibo-enviado-por-get | WARNING | `routes/web.php:61` | O controlador de recibos envia e-mail. Exija um POST com proteção CSRF para acionar o envio. |\n\nOs achados precisam de triagem para classificação como verdadeiro ou falso positivo.\n\n## SCA - OSV-Scanner\n\n**Findings: 49**\n\n| Dependência | Versão | Vulnerabilidade | Versão corrigida (OSV) | Arquivo de origem |\n| --- | --- | --- | --- | --- |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-94pj-82f3-465w](https://osv.dev/vulnerability/GHSA-94pj-82f3-465w) | 7.14.2 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-cwxw-98qj-8qjx](https://osv.dev/vulnerability/GHSA-cwxw-98qj-8qjx) | 7.12.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-f283-ghqc-fg79](https://osv.dev/vulnerability/GHSA-f283-ghqc-fg79) | 7.15.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-f7vp-7xgx-4w4r](https://osv.dev/vulnerability/GHSA-f7vp-7xgx-4w4r) | 7.15.2, 8.0.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-g446-98w2-8p5w](https://osv.dev/vulnerability/GHSA-g446-98w2-8p5w) | 7.12.3 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-h95v-h523-3mw8](https://osv.dev/vulnerability/GHSA-h95v-h523-3mw8) | 7.15.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-v5mv-p594-2x33](https://osv.dev/vulnerability/GHSA-v5mv-p594-2x33) | 7.15.2, 8.0.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-wm3w-8rrp-j577](https://osv.dev/vulnerability/GHSA-wm3w-8rrp-j577) | 7.15.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-wpwq-4j6v-78m3](https://osv.dev/vulnerability/GHSA-wpwq-4j6v-78m3) | 7.12.1 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-34xg-wgjx-8xph](https://osv.dev/vulnerability/GHSA-34xg-wgjx-8xph) | 2.10.2 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-c2w2-prh8-qm98](https://osv.dev/vulnerability/GHSA-c2w2-prh8-qm98) | 2.12.3 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-hq7v-mx3g-29hw](https://osv.dev/vulnerability/GHSA-hq7v-mx3g-29hw) | 2.10.2 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-vm85-hxw5-5432](https://osv.dev/vulnerability/GHSA-vm85-hxw5-5432) | 2.12.1 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-5vg9-5847-vvmq](https://osv.dev/vulnerability/GHSA-5vg9-5847-vvmq) | 13.10.0, 12.60.0 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-63hm-g96r-2m2q](https://osv.dev/vulnerability/GHSA-63hm-g96r-2m2q) | 12.71.0, 13.40.0 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-crmm-hgp2-wgrp](https://osv.dev/vulnerability/GHSA-crmm-hgp2-wgrp) | 13.12.0, 12.61.1 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-f9x3-7vq9-cph6](https://osv.dev/vulnerability/GHSA-f9x3-7vq9-cph6) | 13.27.0, 12.68.0, 11.56.1 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-jh5r-qr3c-85q8](https://osv.dev/vulnerability/GHSA-jh5r-qr3c-85q8) | 12.69.0, 13.30.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-29pj-957v-52mc](https://osv.dev/vulnerability/GHSA-29pj-957v-52mc) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-2q4p-g7hv-5rgv](https://osv.dev/vulnerability/GHSA-2q4p-g7hv-5rgv) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-3527-qv2q-pfvx](https://osv.dev/vulnerability/GHSA-3527-qv2q-pfvx) | 2.7.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-3q6v-r5mr-hxv8](https://osv.dev/vulnerability/GHSA-3q6v-r5mr-hxv8) | 2.10.2 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-4v6x-c7xx-hw9f](https://osv.dev/vulnerability/GHSA-4v6x-c7xx-hw9f) | 2.8.1 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-8rr7-cvq3-gmfh](https://osv.dev/vulnerability/GHSA-8rr7-cvq3-gmfh) | 2.10.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-97jj-33gv-5xf9](https://osv.dev/vulnerability/GHSA-97jj-33gv-5xf9) | 2.10.2 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-g2gp-3wwq-f4ph](https://osv.dev/vulnerability/GHSA-g2gp-3wwq-f4ph) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-hh8v-hgvp-g3f5](https://osv.dev/vulnerability/GHSA-hh8v-hgvp-g3f5) | 2.8.2 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-j8pm-gj4c-rq4x](https://osv.dev/vulnerability/GHSA-j8pm-gj4c-rq4x) | 2.9.1 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-jfm3-95jq-q3rf](https://osv.dev/vulnerability/GHSA-jfm3-95jq-q3rf) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-jjv6-8j6v-6j52](https://osv.dev/vulnerability/GHSA-jjv6-8j6v-6j52) | 2.9.1 | `composer.lock` |\n\nExibidos 30 de 49 findings. Os demais estão no log do SCA.\n\nA versão corrigida é informada pelo OSV quando disponível. Verifique a compatibilidade antes de atualizar a dependência.\n",
+    "depois": "## SAST - Semgrep\n\n**Findings: 1**\n\n| Regra | Regra (Completa) | Severidade | Código | Descrição |\n| --- | --- | --- | --- | --- |\n| detected-bcrypt-hash | generic.secrets.security.detected-bcrypt-hash.detected-bcrypt-hash | ERROR | `database/factories/UserFactory.php:24` | bcrypt hash detected |\n\nOs achados precisam de triagem para classificação como verdadeiro ou falso positivo.\n\n## SCA - OSV-Scanner\n\n**Findings: 44**\n\n| Dependência | Versão | Vulnerabilidade | Versão corrigida (OSV) | Arquivo de origem |\n| --- | --- | --- | --- | --- |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-94pj-82f3-465w](https://osv.dev/vulnerability/GHSA-94pj-82f3-465w) | 7.14.2 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-cwxw-98qj-8qjx](https://osv.dev/vulnerability/GHSA-cwxw-98qj-8qjx) | 7.12.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-f283-ghqc-fg79](https://osv.dev/vulnerability/GHSA-f283-ghqc-fg79) | 7.15.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-f7vp-7xgx-4w4r](https://osv.dev/vulnerability/GHSA-f7vp-7xgx-4w4r) | 7.15.2, 8.0.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-g446-98w2-8p5w](https://osv.dev/vulnerability/GHSA-g446-98w2-8p5w) | 7.12.3 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-h95v-h523-3mw8](https://osv.dev/vulnerability/GHSA-h95v-h523-3mw8) | 7.15.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-v5mv-p594-2x33](https://osv.dev/vulnerability/GHSA-v5mv-p594-2x33) | 7.15.2, 8.0.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-wm3w-8rrp-j577](https://osv.dev/vulnerability/GHSA-wm3w-8rrp-j577) | 7.15.1 | `composer.lock` |\n| guzzlehttp/guzzle | 7.9.2 | [GHSA-wpwq-4j6v-78m3](https://osv.dev/vulnerability/GHSA-wpwq-4j6v-78m3) | 7.12.1 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-34xg-wgjx-8xph](https://osv.dev/vulnerability/GHSA-34xg-wgjx-8xph) | 2.10.2 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-c2w2-prh8-qm98](https://osv.dev/vulnerability/GHSA-c2w2-prh8-qm98) | 2.12.3 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-hq7v-mx3g-29hw](https://osv.dev/vulnerability/GHSA-hq7v-mx3g-29hw) | 2.10.2 | `composer.lock` |\n| guzzlehttp/psr7 | 2.7.0 | [GHSA-vm85-hxw5-5432](https://osv.dev/vulnerability/GHSA-vm85-hxw5-5432) | 2.12.1 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-5vg9-5847-vvmq](https://osv.dev/vulnerability/GHSA-5vg9-5847-vvmq) | 13.10.0, 12.60.0 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-63hm-g96r-2m2q](https://osv.dev/vulnerability/GHSA-63hm-g96r-2m2q) | 12.71.0, 13.40.0 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-crmm-hgp2-wgrp](https://osv.dev/vulnerability/GHSA-crmm-hgp2-wgrp) | 13.12.0, 12.61.1 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-f9x3-7vq9-cph6](https://osv.dev/vulnerability/GHSA-f9x3-7vq9-cph6) | 13.27.0, 12.68.0, 11.56.1 | `composer.lock` |\n| laravel/framework | v10.48.29 | [GHSA-jh5r-qr3c-85q8](https://osv.dev/vulnerability/GHSA-jh5r-qr3c-85q8) | 12.69.0, 13.30.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-29pj-957v-52mc](https://osv.dev/vulnerability/GHSA-29pj-957v-52mc) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-2q4p-g7hv-5rgv](https://osv.dev/vulnerability/GHSA-2q4p-g7hv-5rgv) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-3527-qv2q-pfvx](https://osv.dev/vulnerability/GHSA-3527-qv2q-pfvx) | 2.7.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-3q6v-r5mr-hxv8](https://osv.dev/vulnerability/GHSA-3q6v-r5mr-hxv8) | 2.10.2 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-4v6x-c7xx-hw9f](https://osv.dev/vulnerability/GHSA-4v6x-c7xx-hw9f) | 2.8.1 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-8rr7-cvq3-gmfh](https://osv.dev/vulnerability/GHSA-8rr7-cvq3-gmfh) | 2.10.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-97jj-33gv-5xf9](https://osv.dev/vulnerability/GHSA-97jj-33gv-5xf9) | 2.10.2 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-g2gp-3wwq-f4ph](https://osv.dev/vulnerability/GHSA-g2gp-3wwq-f4ph) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-hh8v-hgvp-g3f5](https://osv.dev/vulnerability/GHSA-hh8v-hgvp-g3f5) | 2.8.2 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-j8pm-gj4c-rq4x](https://osv.dev/vulnerability/GHSA-j8pm-gj4c-rq4x) | 2.9.1 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-jfm3-95jq-q3rf](https://osv.dev/vulnerability/GHSA-jfm3-95jq-q3rf) | 2.9.0 | `composer.lock` |\n| league/commonmark | 2.6.1 | [GHSA-jjv6-8j6v-6j52](https://osv.dev/vulnerability/GHSA-jjv6-8j6v-6j52) | 2.9.1 | `composer.lock` |\n\nExibidos 30 de 44 findings. Os demais estão no log do SCA.\n\nA versão corrigida é informada pelo OSV quando disponível. Verifique a compatibilidade antes de atualizar a dependência.\n"
+  },
+  "demo": "Fonte: https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478321414/job/138744375575\n2026-11-24T20:13:51.2440303Z GET -> 405\n2026-11-24T20:13:51.2440683Z POST sem token -> 419\n2026-11-24T20:13:51.2441338Z Formulário válido -> HTTP 200 na listagem de vendas\n2026-11-24T20:13:51.3695070Z Recibo confirmado no log do transporte de e-mail local.",
+  "slides": [
+    {
+      "tag": "Estudo de caso  /  Laravel Sales Manager",
+      "title": "O que mudou na segurança da venda?",
+      "body": [
+        [
+          "p",
+          "Da consulta de uma venda ao envio do recibo, a atividade acompanhou o código da loja, a configuração dos scanners e as bibliotecas instaladas pelo Docker."
+        ],
+        [
+          "table",
+          [
+            "Medição comparável",
+            "Antes",
+            "Depois"
+          ],
+          [
+            [
+              "SAST · ocorrências no código e no workflow",
+              "5",
+              "1"
+            ],
+            [
+              "SCA · avisos agrupados por pacote",
+              "49",
+              "44"
+            ]
+          ],
+          [
+            0.64,
+            0.18,
+            0.18
+          ]
+        ],
+        [
+          "note",
+          "Projeto de FernandoROL · main 1be0400 · execução em Docker · 24 de novembro de 2026"
+        ]
+      ]
+    },
+    {
+      "tag": "Aplicação  /  Demonstração",
+      "title": "Uma venda relaciona cliente e produto",
+      "body": [
+        [
+          "image"
+        ],
+        [
+          "p",
+          "O Laravel grava a venda no MySQL. O dashboard mostra a atividade do mês. O ambiente de demonstração grava o recibo em log."
+        ]
+      ]
+    },
+    {
+      "tag": "Método  /  GitHub Actions",
+      "title": "Três execuções respondem a duas perguntas",
+      "body": [
+        [
+          "table",
+          [
+            "Revisão",
+            "O que o workflow analisou",
+            "SAST",
+            "SCA"
+          ],
+          [
+            [
+              "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45477800076\" color=\"#075f68\"><u>71fd31d · original</u></a>",
+              "Anexo do professor sem alterações.",
+              "4",
+              "49"
+            ],
+            [
+              "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478091935\" color=\"#075f68\"><u>15b008a · antes</u></a>",
+              "Mesma aplicação; regra do recibo e preservação dos JSONs.",
+              "5",
+              "49"
+            ],
+            [
+              "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478321485\" color=\"#075f68\"><u>7883179 · depois</u></a>",
+              "Mesma cobertura da etapa anterior; correções aplicadas.",
+              "1",
+              "44"
+            ]
+          ],
+          [
+            0.22,
+            0.54,
+            0.12,
+            0.12
+          ]
+        ],
+        [
+          "note",
+          "A rota GET já existia. A passagem de 4 para 5 reflete a cobertura adicional. São as duas últimas revisões que medem o efeito das correções."
+        ]
+      ]
+    },
+    {
+      "tag": "SAST  /  Verdadeiro positivo",
+      "title": "Abrir um endereço podia enviar um recibo",
+      "body": [
+        [
+          "code",
+          [
+            "routes/web.php:61   Route::get('/SendEmailRecipt/{id}', …)",
+            "SalleController     Mail::to($clientMail)->send(…)"
+          ]
+        ],
+        [
+          "p",
+          "Prioridade alta. O envio ao cliente podia acontecer durante uma simples navegação. A rota passou a aceitar POST, e o botão envia um formulário com @csrf."
+        ],
+        [
+          "note",
+          "Regra laravel-recibo-enviado-por-get: 1 → 0. A regra permanece ativa, junto com o teste de método e token."
+        ]
+      ]
+    },
+    {
+      "tag": "SAST  /  Quatro ocorrências",
+      "title": "Três referências mutáveis e um hash de testes",
+      "body": [
+        [
+          "table",
+          [
+            "Evidência na revisão anterior",
+            "Triagem e tratamento",
+            "Antes → depois"
+          ],
+          [
+            [
+              "scans.yml:21 · checkout@v6",
+              "VP. Prepara o código do SAST; revisão fixada pelo SHA.",
+              "1 → 0"
+            ],
+            [
+              "scans.yml:97 · checkout@v6",
+              "VP. Prepara o lockfile do SCA; revisão fixada pelo SHA.",
+              "1 → 0"
+            ],
+            [
+              "scans.yml:106 · OSV @v2.7.0",
+              "VP. Executa a análise; revisão fixada pelo SHA.",
+              "1 → 0"
+            ],
+            [
+              "UserFactory.php:24 · hash bcrypt",
+              "FP para credencial operacional. Fábrica fictícia, fora do seeder usado. Cadastro real usa Hash::make.",
+              "1 → 1"
+            ]
+          ],
+          [
+            0.31,
+            0.54,
+            0.15
+          ]
+        ],
+        [
+          "note",
+          "Prioridade alta para preservar a integridade dos scans. Revisar novos SHAs nas atualizações e manter o alerta da fábrica sob triagem."
+        ]
+      ]
+    },
+    {
+      "tag": "SCA  /  Verdadeiros positivos tratados",
+      "title": "HTTP e e-mail entram no fluxo da loja",
+      "body": [
+        [
+          "table",
+          [
+            "Pacote e aviso",
+            "Versão antes → depois",
+            "Por que tratar"
+          ],
+          [
+            [
+              "symfony/http-foundation<br/>GHSA-r925-mgvr-h9cc",
+              "6.4.18 → 6.4.50<br/>Correção desde 6.4.46.",
+              "O processamento de Cache-Control podia consumir CPU em excesso. A disponibilidade afeta o painel."
+            ],
+            [
+              "symfony/mime<br/>GHSA-qpmx-3rfj-7rhv",
+              "6.4.19 → 6.4.49<br/>Correção desde 6.4.40.",
+              "Quebras de linha em endereços podiam alterar a mensagem. O recibo usa o e-mail cadastrado."
+            ]
+          ],
+          [
+            0.32,
+            0.25,
+            0.43
+          ]
+        ],
+        [
+          "note",
+          "Ambos os IDs passaram de 1 para 0. As duas atualizações retiraram mais três avisos. Auditar o lockfile e testar o fluxo de vendas a cada atualização."
+        ]
+      ]
+    },
+    {
+      "tag": "SCA  /  Risco residual",
+      "title": "A versão está afetada. E a configuração?",
+      "body": [
+        [
+          "table",
+          [
+            "Pacote e aviso",
+            "O que motivou o adiamento",
+            "Tratamento"
+          ],
+          [
+            [
+              "symfony/mailer 6.4.18<br/>GHSA-xx3c-qf5g-hc39",
+              "VP de versão. O modo afetado do Sendmail não é utilizado pelo transporte de log da demonstração.",
+              "Atualizar para 6.4.40+ antes de ativar esse modo."
+            ],
+            [
+              "symfony/process 6.4.20<br/>GHSA-r39x-jcww-82v6",
+              "VP de versão. O cenário envolve MSYS2/Git Bash no Windows. O PHP do projeto roda em Linux no Docker.",
+              "Atualizar para 6.4.33+ antes de oferecer o ambiente afetado."
+            ]
+          ],
+          [
+            0.31,
+            0.41,
+            0.28
+          ]
+        ],
+        [
+          "note",
+          "Cada um permaneceu em 1 → 1. São dois dos 44 avisos em 12 pacotes. O CSV identifica os demais 42, que exigem triagem individual."
+        ]
+      ]
+    },
+    {
+      "tag": "Validação  /  Aplicação em execução",
+      "title": "O formulário legítimo continua funcionando",
+      "body": [
+        [
+          "table",
+          [
+            "Verificação HTTP em Docker",
+            "Resultado observado"
+          ],
+          [
+            [
+              "Visitar o endereço do recibo com GET",
+              "405 · método recusado"
+            ],
+            [
+              "Enviar POST sem token de sessão",
+              "419 · formulário recusado"
+            ],
+            [
+              "Enviar POST com o token do formulário",
+              "Redirecionamento e HTTP 200 na listagem"
+            ],
+            [
+              "Conferir a mensagem no log local",
+              "Assunto Email Sale Recipt localizado"
+            ]
+          ],
+          [
+            0.53,
+            0.47
+          ]
+        ],
+        [
+          "p",
+          "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478321414\" color=\"#075f68\"><u>Abrir a etapa Conferir recibo na aplicação Docker</u></a>"
+        ]
+      ]
+    },
+    {
+      "tag": "Conclusão  /  Alcance da evidência",
+      "title": "Um alerta ausente comprova a correção?",
+      "body": [
+        [
+          "p",
+          "<b>Não.</b> Na primeira execução, a rota por GET já enviava recibos e ainda assim não apareceu. Uma mudança de cobertura fez o alerta surgir antes de qualquer alteração na rota."
+        ],
+        [
+          "table",
+          [
+            "Evidência comparada",
+            "O que demonstra"
+          ],
+          [
+            [
+              "Semgrep: 303 regras em 117 arquivos. OSV: 112 pacotes nas duas revisões.",
+              "A cobertura observada foi comparável."
+            ],
+            [
+              "Diff, lockfile e teste HTTP com o transporte de e-mail local.",
+              "As alterações chegaram à revisão testada e o recibo continuou funcionando."
+            ]
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ],
+        [
+          "note",
+          "Resultado residual: um alerta contextual de SAST e 44 avisos de dependências."
+        ]
+      ]
+    },
+    {
+      "tag": "Apresentação  /  Roteiro prático",
+      "title": "O que mostrar ao professor",
+      "body": [
+        [
+          "table",
+          [
+            "Etapa",
+            "O que abrir e explicar"
+          ],
+          [
+            [
+              "1 · Aplicação",
+              "Crie uma venda fictícia e abra o dashboard. Mostre o cliente, o produto e a venda."
+            ],
+            [
+              "2 · Medição",
+              "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45477800076\" color=\"#075f68\"><u>Workflow do professor</u></a> e <a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478091935\" color=\"#075f68\"><u>linha de base complementar</u></a>. Diferencie regra, alerta e risco confirmado."
+            ],
+            [
+              "3 · Correções",
+              "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/compare/15b008a81c71379aa8b1e0479d888475d2cb6406...7883179b48f3d283fef8474121eb620d6e613a43\" color=\"#075f68\"><u>Comparação do código</u></a>. Mostre POST, @csrf, referências fixas e versões das bibliotecas."
+            ],
+            [
+              "4 · Resultado",
+              "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478321485\" color=\"#075f68\"><u>Segundo scan comparável</u></a> e <a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478321414\" color=\"#075f68\"><u>teste em Docker</u></a>. Gere o recibo e explique o que ficou pendente."
+            ]
+          ],
+          [
+            0.23,
+            0.77
+          ]
+        ],
+        [
+          "note",
+          "O ZIP reúne o projeto corrigido, os JSONs, o inventário por pacote/ID, a captura do painel, o diff e o roteiro de reprodução."
+        ]
+      ]
+    }
+  ],
+  "report": [
+    {
+      "tag": "01  /  O sistema",
+      "title": "Da venda ao recibo",
+      "body": [
+        [
+          "p",
+          "Uma loja termina uma venda. O atendente abre a lista, escolhe o registro e pede uma cópia do recibo para o cliente. Esse percurso dá ao estudo um começo observável e uma pergunta concreta: abrir um endereço da aplicação deveria bastar para enviar uma mensagem?"
+        ],
+        [
+          "h",
+          "Por que esta aplicação serviu para a atividade"
+        ],
+        [
+          "p",
+          "O Laravel Sales Manager, projeto de FernandoROL desenvolvido durante um curso de Laravel, cadastra clientes e produtos, persiste vendas no MySQL e calcula indicadores no dashboard. O Docker Compose inicia o banco, aplica as migrações e disponibiliza a aplicação via Nginx e PHP. A demonstração usa dados fictícios e grava e-mails no log."
+        ],
+        [
+          "image"
+        ],
+        [
+          "p",
+          "Dashboard da revisão corrigida, capturado nesta entrega depois de criar uma venda fictícia. O teste de instalação também verificou o estado vazio e a persistência após recriar os contêineres."
+        ],
+        [
+          "h",
+          "O ponto de partida"
+        ],
+        [
+          "p",
+          "O estudo partiu da main em <b>1be0400</b>, com a instalação Docker e o novo dashboard. As alterações da atividade ficaram na branch <b>appsec/docker-atualizado</b>. Os scans desta entrega mediram essa versão do sistema. <a href=\"https://github.com/FernandoROL/Laravel_sales_manager/tree/1be0400bf5975084462073f4d3df3f292e3a2a70\" color=\"#075f68\"><u>Abrir o código que serviu de base</u></a>"
+        ]
+      ]
+    },
+    {
+      "tag": "02  /  Método",
+      "title": "O que cada execução mediu",
+      "body": [
+        [
+          "p",
+          "<b>SAST</b> é a leitura do código e da configuração em busca de padrões de risco. Aqui, o Semgrep leu arquivos do projeto. <b>SCA</b> é o exame das dependências. O OSV-Scanner comparou as versões do composer.lock com avisos públicos. Um <b>commit</b> identifica a revisão dos arquivos, e um <b>run</b> identifica a execução que os analisou."
+        ],
+        [
+          "table",
+          [
+            "Revisão e execução",
+            "SAST",
+            "SCA",
+            "Mudança que explica a leitura"
+          ],
+          [
+            [
+              "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45477800076\" color=\"#075f68\"><u>71fd31d · original</u></a>",
+              "4",
+              "49",
+              "Somente o scans.yml do professor foi acrescentado à aplicação."
+            ],
+            [
+              "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478091935\" color=\"#075f68\"><u>15b008a · antes</u></a>",
+              "5",
+              "49",
+              "Entraram uma regra para a rota existente, os uploads dos JSONs e o inventário completo de SCA."
+            ],
+            [
+              "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478321485\" color=\"#075f68\"><u>7883179 · depois</u></a>",
+              "1",
+              "44",
+              "A mesma cobertura analisou as correções de código, configuração e dependências."
+            ]
+          ],
+          [
+            0.24,
+            0.1,
+            0.1,
+            0.56
+          ]
+        ],
+        [
+          "h",
+          "Por que preservar três execuções?"
+        ],
+        [
+          "p",
+          "A primeira registra a resposta exata ao enunciado: o arquivo anexado foi salvo em .github/workflows/scans.yml e executado no GitHub Actions. O material de entrega confere o SHA-256 do arquivo original. A segunda mede a cobertura adicional antes de qualquer correção. Comparar a segunda com a terceira evita atribuir a uma correção uma diferença causada pela troca de regras."
+        ],
+        [
+          "p",
+          "A rota de envio por GET e as versões antigas dos pacotes já existiam. Nenhuma vulnerabilidade foi introduzida para aumentar a contagem. Os uploads acrescentados para guardar relatórios já usavam referências fixas."
+        ],
+        [
+          "note",
+          "Como conferir: abra o Overview da execução original. Depois abra o Overview da segunda execução e procure laravel-recibo-enviado-por-get. O novo alerta aparece mesmo sem mudança na rota."
+        ]
+      ]
+    },
+    {
+      "tag": "03  /  Triagem SAST",
+      "title": "Do padrão encontrado à decisão",
+      "body": [
+        [
+          "p",
+          "A classificação como verdadeiro positivo (VP) exige confirmar que o risco descrito existe no contexto analisado. Um falso positivo (FP) pode reconhecer corretamente um texto, mas atribuir a ele um significado que o uso real não sustenta."
+        ],
+        [
+          "table",
+          [
+            "Achado · evidência no scan antes",
+            "Decisão e justificativa técnica"
+          ],
+          [
+            [
+              "S1 · routes/web.php:61<br/>Route::get('/SendEmailRecipt/{id}', …)",
+              "<b>VP.</b> O controlador busca a venda e chama Mail::to(...)-&gt;send(...). Consultar esse endereço tinha um efeito externo: o envio do recibo."
+            ],
+            [
+              "S2 · scans.yml:21<br/>actions/checkout@v6",
+              "<b>VP.</b> O checkout prepara o código lido pelo SAST. A etiqueta v6 podia passar a indicar outra revisão."
+            ],
+            [
+              "S3 · scans.yml:97<br/>actions/checkout@v6",
+              "<b>VP.</b> Ocorrência da mesma regra no job de SCA. Aqui o checkout determina qual composer.lock será examinado."
+            ],
+            [
+              "S4 · scans.yml:106<br/>osv-scanner-action@v2.7.0",
+              "<b>VP.</b> A etiqueta apontava para a ação que executa a análise de dependências. Seu código poderia mudar sem mudança visível no YAML."
+            ],
+            [
+              "S5 · UserFactory.php:24<br/>'password' =&gt; '$2y$10$…'",
+              "<b>FP contextual para exposição de credencial operacional.</b> A fábrica cria usuários fictícios. DatabaseSeeder cria cliente, produto e venda de demonstração. O cadastro de usuário calcula o hash da senha recebida com Hash::make."
+            ]
+          ],
+          [
+            0.42,
+            0.58
+          ]
+        ],
+        [
+          "h",
+          "O que ficou em aberto"
+        ],
+        [
+          "p",
+          "A ocorrência da fábrica continuou visível. A decisão precisa ser revista se a fábrica passar a criar contas que alguém possa usar em um ambiente real. Os três alertas de tags são três locais no workflow e compartilham uma causa técnica."
+        ],
+        [
+          "note",
+          "O YAML original apontou as três tags nas linhas 21, 89 e 98. Depois dos passos de preservação, elas passaram às linhas 21, 97 e 106. A comparação usou ação, job e regra."
+        ]
+      ]
+    },
+    {
+      "tag": "04  /  Triagem SCA",
+      "title": "Quatro avisos, duas prioridades",
+      "body": [
+        [
+          "p",
+          "Os quatro casos abaixo são <b>verdadeiros positivos de versão</b>. O arquivo composer.lock contém o pacote na faixa afetada. A exposição do sistema depende também da função utilizada, do sistema operacional e da configuração de e-mail."
+        ],
+        [
+          "h",
+          "HTTP Foundation · tratar nesta atividade"
+        ],
+        [
+          "p",
+          "<b>symfony/http-foundation 6.4.18.</b> A análise de certos cabeçalhos Cache-Control podia exigir CPU em excesso. O componente trata requisições que chegam ao Laravel, tornando a disponibilidade relevante para todo o painel. A atualização para <b>6.4.50</b> ultrapassa a primeira correção na série 6.4, a versão 6.4.46. <a href=\"https://osv.dev/vulnerability/GHSA-r925-mgvr-h9cc\" color=\"#075f68\"><u>GHSA-r925-mgvr-h9cc</u></a>"
+        ],
+        [
+          "h",
+          "MIME · tratar nesta atividade"
+        ],
+        [
+          "p",
+          "<b>symfony/mime 6.4.19.</b> Quebras de linha indevidas em um endereço podiam afetar a estrutura do e-mail. O recibo usa o endereço do cliente cadastrado. A atualização para <b>6.4.49</b> inclui a correção publicada em 6.4.40. A validação do endereço no cadastro também é uma prevenção recomendada. <a href=\"https://osv.dev/vulnerability/GHSA-qpmx-3rfj-7rhv\" color=\"#075f68\"><u>GHSA-qpmx-3rfj-7rhv</u></a>"
+        ],
+        [
+          "h",
+          "Mailer · manter no inventário"
+        ],
+        [
+          "p",
+          "<b>symfony/mailer 6.4.18.</b> O aviso depende de um modo específico do transporte Sendmail. O Compose da atividade usa o transporte de log. Manter esse transporte neste ambiente e atualizar para 6.4.40 ou superior antes de habilitar o modo afetado. O aviso permaneceu nas duas medições. <a href=\"https://osv.dev/vulnerability/GHSA-xx3c-qf5g-hc39\" color=\"#075f68\"><u>GHSA-xx3c-qf5g-hc39</u></a>"
+        ],
+        [
+          "h",
+          "Process · manter no inventário"
+        ],
+        [
+          "p",
+          "<b>symfony/process 6.4.20.</b> O aviso envolve MSYS2/Git Bash em Windows. O PHP desta demonstração executou em contêiner Linux. Essa condição reduz a prioridade para o ambiente avaliado. Atualizar para 6.4.33 ou superior antes de executar a aplicação no ambiente afetado. <a href=\"https://osv.dev/vulnerability/GHSA-r39x-jcww-82v6\" color=\"#075f68\"><u>GHSA-r39x-jcww-82v6</u></a>"
+        ]
+      ]
+    },
+    {
+      "tag": "05  /  Tratamento",
+      "title": "As mudanças que explicam os resultados",
+      "body": [
+        [
+          "h",
+          "1. Reservar o envio para o formulário"
+        ],
+        [
+          "p",
+          "O botão Email Receipt agora envia POST. A rota passou a aceitar esse método, e a diretiva @csrf inclui o token vinculado à sessão. Prioridade alta: navegação e pré-carregamento de links podiam disparar uma mensagem ao cliente. A regra específica e o teste HTTP no workflow de Docker verificam esse comportamento em alterações futuras."
+        ],
+        [
+          "h",
+          "2. Fixar as revisões das ações"
+        ],
+        [
+          "p",
+          "As duas referências de checkout e a referência do OSV passaram a usar o SHA completo de seus fornecedores. Prioridade alta para a integridade da análise: essas ações selecionam ou examinam os arquivos que sustentam as evidências. Para atualizar uma ação, revisar o novo SHA e testar a alteração. A imagem do Semgrep e as regras remotas continuam podendo evoluir."
+        ],
+        [
+          "h",
+          "3. Atualizar e instalar as bibliotecas"
+        ],
+        [
+          "p",
+          "Foi reaproveitada uma resolução de Composer compatível com o mesmo composer.json e com o mesmo lockfile inicial. O diff desta atividade confere as mudanças de HTTP Foundation e MIME. A imagem Docker instalou o novo lockfile e o fluxo de venda e recibo voltou a executar. Para prevenir recorrência, auditar o lockfile nas alterações e testar os fluxos de HTTP e e-mail após atualizar."
+        ],
+        [
+          "table",
+          [
+            "Objeto da verificação",
+            "Antes → depois",
+            "Evidência complementar"
+          ],
+          [
+            [
+              "Rota do recibo",
+              "1 → 0",
+              "Método, token e log verificados em HTTP."
+            ],
+            [
+              "Checkout SAST / SCA e ação OSV",
+              "3 → 0",
+              "SHA completo nas três linhas do YAML."
+            ],
+            [
+              "HTTP Foundation / MIME",
+              "3 + 2 → 0",
+              "Novas versões no lockfile; cinco IDs ausentes."
+            ],
+            [
+              "Hash da fábrica",
+              "1 → 1",
+              "FP mantido e documentado."
+            ]
+          ],
+          [
+            0.39,
+            0.22,
+            0.39
+          ]
+        ],
+        [
+          "p",
+          "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/compare/15b008a81c71379aa8b1e0479d888475d2cb6406...7883179b48f3d283fef8474121eb620d6e613a43\" color=\"#075f68\"><u>Abrir o diff entre a análise anterior e as correções</u></a>"
+        ]
+      ]
+    },
+    {
+      "tag": "06  /  Validação",
+      "title": "O que aconteceu ao usar a aplicação?",
+      "body": [
+        [
+          "p",
+          "O teste no GitHub Actions iniciou o Compose em um clone limpo, abriu o painel vazio e executou a suíte do projeto. Em seguida, criou uma venda fictícia, recriou os contêineres e verificou que a venda e as credenciais persistiram. O teste do recibo usou a listagem real e a sessão HTTP do navegador de teste."
+        ],
+        [
+          "table",
+          [
+            "Ação na revisão corrigida",
+            "Resultado registrado"
+          ],
+          [
+            [
+              "Abrir o endereço por GET",
+              "405 · método recusado."
+            ],
+            [
+              "Enviar POST sem o token",
+              "419 · formulário recusado."
+            ],
+            [
+              "Enviar o formulário com token válido",
+              "Redirecionamento à listagem e resposta HTTP 200."
+            ],
+            [
+              "Examinar o transporte de e-mail local",
+              "Assunto Email Sale Recipt encontrado no log."
+            ]
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ],
+        [
+          "p",
+          "O job de Docker concluiu com sucesso. A suíte existente registrou 14 asserções e dois testes com avisos; o log também mostra falha de permissão ao gravar o cache do PHPUnit. As quatro verificações HTTP e de log acima passaram em uma etapa própria. <a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478321414\" color=\"#075f68\"><u>Abrir o teste e os logs</u></a>"
+        ],
+        [
+          "h",
+          "O que permanece pendente?"
+        ],
+        [
+          "p",
+          "O OSV ainda aponta <b>44 avisos em 12 pacotes</b>. Mailer e Process foram analisados nesta amostra. Os outros 42 precisam de avaliação individual. O arquivo inventario-sca.csv identifica cada par pacote/aviso e seu resultado. No SAST permanece o alerta contextual da fábrica."
+        ],
+        [
+          "h",
+          "O desaparecimento de um alerta comprova a correção?"
+        ],
+        [
+          "p",
+          "<b>Não.</b> A rota já enviava e-mail no primeiro scan e só apareceu quando foi criada uma regra para reconhecê-la. Excluir um arquivo ou alterar uma regra também muda o resultado. Neste caso, as duas execuções comparáveis aplicaram 303 regras a 117 arquivos, e o OSV leu 112 pacotes. A conclusão combina o diff, o novo lockfile, os scans e o teste funcional."
+        ]
+      ]
+    },
+    {
+      "tag": "07  /  Demonstração",
+      "title": "Como acompanhar e apresentar",
+      "body": [
+        [
+          "p",
+          "Use a revisão corrigida. O ZIP inclui o código em projeto/ e os relatórios em evidencias/. Em uma cópia nova, os comandos abaixo criam um ambiente local e uma venda fictícia."
+        ],
+        [
+          "code",
+          [
+            "cd projeto",
+            "docker compose up --build -d",
+            "docker compose exec sistema_gestao php artisan db:seed"
+          ]
+        ],
+        [
+          "p",
+          "Abra http://localhost:8989/dashboard. Mostre a venda recente e o produto que aparece no ranking. Abra Vendas, encontre a linha da demonstração e clique em Email Receipt. Confira o assunto na saída deste comando:"
+        ],
+        [
+          "code",
+          [
+            "docker compose exec sistema_gestao tail -n 60 storage/logs/laravel.log"
+          ]
+        ],
+        [
+          "h",
+          "Sequência sugerida para falar"
+        ],
+        [
+          "p",
+          "<b>Aplicação.</b> Mostre o registro de venda. <b>Método.</b> Abra o run original e diferencie SAST de SCA. <b>Decisão.</b> Mostre a rota e uma biblioteca, explicando como atingem a loja. <b>Prova.</b> Abra o segundo Overview comparável e o teste HTTP. <b>Limites.</b> Cite o falso positivo e explique as pendências."
+        ],
+        [
+          "h",
+          "Mapa de evidências"
+        ],
+        [
+          "p",
+          "O pacote guarda o YAML original, os resumos do GitHub, os quatro JSONs das medições comparáveis, o CSV de pendências, o diff, a transcrição do teste do recibo e uma captura do painel. Os links nos documentos abrem os commits, avisos e execuções correspondentes."
+        ],
+        [
+          "p",
+          "<a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45477800076\" color=\"#075f68\"><u>Workflow original</u></a>  ·  <a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478091935\" color=\"#075f68\"><u>Antes das correções</u></a>  ·  <a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478321485\" color=\"#075f68\"><u>Depois das correções</u></a>  ·  <a href=\"https://github.com/FernandoROL/Laravel_sales_manager/actions/runs/45478321414\" color=\"#075f68\"><u>Demonstração em Docker</u></a>"
+        ],
+        [
+          "p",
+          "<a href=\"https://laravel.com/docs/10.x/csrf\" color=\"#075f68\"><u>Documentação do Laravel sobre CSRF</u></a>  ·  <a href=\"https://docs.github.com/en/actions/reference/security/secure-use\" color=\"#075f68\"><u>Orientações do GitHub para ações</u></a>"
+        ]
+      ]
+    }
+  ]
+}
