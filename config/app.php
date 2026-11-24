@@ -121,7 +121,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY') ?: (is_readable('/run/app-key/key') ? trim(file_get_contents('/run/app-key/key')) : null),
 
     'cipher' => 'AES-256-CBC',
 

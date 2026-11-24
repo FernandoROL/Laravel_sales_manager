@@ -1,103 +1,42 @@
-# Sales management system
+# Laravel Sales Manager
 
-System I made as a part of a Laravel course at Udemy
+Sistema de gestão de vendas em Laravel. Permite cadastrar clientes e produtos, registrar vendas e emitir recibos.
 
-## Features
+## Subir o projeto
 
-- Poduct, Client, User CRUDs
-- Sales creation and email receipt 
-- Dashboard with information about each table
+Com Docker e Docker Compose **v2.24 ou superior**, abra a pasta do projeto e execute:
 
-## Tecnologies 
+```sh
+docker compose up --build -d
+```
 
-- PHP 8.1
-- Laravel 10.48.22
-- Docker
-- MySQL
-- JavaScript
-- Bootstrap
+Acesse [o painel de vendas](http://localhost:8989/dashboard). A primeira compilação baixa as dependências do Composer. O Compose prepara as credenciais locais, aguarda o MySQL e aplica as migrações antes de disponibilizar o PHP e o Nginx. Os serviços `credenciais` e `migracoes` terminam com código 0 após concluir suas tarefas.
 
-## Installation
+Em uma instalação nova, as chaves e os dados ficam em volumes do Docker. O banco começa vazio. Para personalizar portas, conexão ou e-mail, copie `.env.example` para `.env` e ajuste os valores antes de iniciar. Um `APP_KEY` ou `DB_PASSWORD` já configurado tem prioridade para a aplicação. Mudanças em PHP da pasta app, nas rotas, nos templates e nos arquivos públicos aparecem ao recarregar a página. Após alterar dependências, configurações PHP ou migrações, repita o comando com `--build`.
 
-### Requirements
-- Docker
-- Git 
+| Tarefa | Comando |
+| --- | --- |
+| Parar e manter os dados | `docker compose down` |
+| Voltar a subir | `docker compose up -d` |
+| Acompanhar a inicialização | `docker compose logs migracoes sistema_gestao nginx` |
+| Criar uma venda de demonstração | `docker compose exec sistema_gestao php artisan db:seed` |
+| Executar os testes em SQLite em memória | `docker compose exec sistema_gestao php artisan test` |
+| Ler os recibos locais | `docker compose exec sistema_gestao tail -n 60 storage/logs/laravel.log` |
+| Subir o phpMyAdmin opcional em localhost:8899 | `docker compose --profile tools up -d phpmyadmin` |
 
+O phpMyAdmin conecta ao serviço `mysql`. Para acessá-lo com uma senha de sua escolha, defina `DB_USERNAME` e `DB_PASSWORD` antes da primeira inicialização do volume. Alterar a senha de um usuário já existente exige atualizá-la também no MySQL.
 
-### Setting up and running
-1. Clone the repository
+## Quem já utilizava o projeto
 
-    - Navigate to a place you would like to clone the repository
+Preserve o nome do projeto Compose, o arquivo `.env` existente e os volumes. O banco da instalação anterior em MySQL 8.4 continua usando o volume `sales_db`. Se você ainda usa os arquivos de MySQL 5.7 do projeto original, confirme estas opções no `.env` **antes de subir** e mantenha as credenciais originais:
 
-    ```sh
-    git clone https://github.com/FernandoROL/Laravel_sales_manager.git
-    ```
+```dotenv
+MYSQL_IMAGE=mysql:5.7.22
+MYSQL_DATA_LOCATION=./.docker/mysql/dbdata
+```
 
+Para atualizar dados do MySQL 5.7 ao 8.4, exporte e importe em um volume novo. A nova configuração usa um volume para os arquivos Laravel em `storage`. Se houver uploads ou logs importantes no diretório local antigo, eles continuam no host e devem ser copiados para o novo volume se necessários.
 
-2. Make sure you are operating from inside the repository
-    ```sh
-    cd ~/{path-to-repository}/Laravel_sales_manager
-    ```
+## Dashboard
 
-
-3. Create a `.env` file with the `.env.example` and adjust it to your liking
-
-    - Copy and rename the `.env.example` to `.env` by hand and edit to your liking
-
-        + or
-
-    - Run the command to do it for you
-        ```sh
-        cp .env.example .env
-        ```
-
-
-4. Run the image using `docker-compose`
-
-    ```sh
-    docker compose up -d
-    ```
-
-
-5. Get inside the docker container 
-
-    ```sh
-    docker compose exec -it sistema_gestao bash
-    ```
-    `sistema_gestao` is the current container name and can be changed
-
-
-6. Install the dependencies 
-
-    ```sh
-    composer install
-    ```
-
-
-7. Generate your `app_key`
-
-    ```sh
-    php artisan key:generate
-    ```
-
-
-8. Run the migrations for the database 
-
-    ```sh
-    php artisan migrate
-    ```
-
-
-9. OPTIONAL - Seed the database to populate with fictional data
-
-    ```sh
-    php artisan db:seed
-    ```
-
-
-### Running the app
-
-- Follow the links below:
-
-    - Main application: http://localhost:8989/
-    - phpMyAdmin database: http://localhost:8899/
+O painel reúne vendas recentes, clientes compradores e produtos mais vendidos no mês. Cada venda corresponde a um produto.

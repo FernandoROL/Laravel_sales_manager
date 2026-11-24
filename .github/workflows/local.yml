@@ -1,0 +1,36 @@
+name: Instalação local
+on: [push, workflow_dispatch]
+permissions:
+  contents: read
+
+jobs:
+  compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Iniciar em um clone limpo
+        run: |
+          test ! -e .env
+          docker compose up --build -d
+          curl -fsSL --retry 10 --retry-all-errors --retry-max-time 45 http://localhost:8989/ -o /tmp/dashboard
+          grep -q 'Nenhuma venda registrada' /tmp/dashboard
+      - name: Validar dashboard e persistência
+        run: |
+          docker compose exec -T sistema_gestao php artisan test
+          docker compose exec -T sistema_gestao php artisan db:seed
+          docker compose exec -T sistema_gestao php artisan db:seed
+          docker compose exec -T sistema_gestao sha256sum /run/app-key/key /run/db-password/password > /tmp/initial-checksums
+          docker compose down
+          docker compose up -d
+          docker compose exec -T sistema_gestao sha256sum /run/app-key/key /run/db-password/password > /tmp/final-checksums
+          cmp /tmp/initial-checksums /tmp/final-checksums
+          curl -fsSL --retry 10 --retry-all-errors --retry-max-time 45 http://localhost:8989/dashboard -o /tmp/dashboard
+          grep -q 'Caderno de demonstração' /tmp/dashboard
+          grep -q '#1</th>' /tmp/dashboard
+          if grep -q '#2</th>' /tmp/dashboard; then exit 1; fi
+      - name: Diagnóstico
+        if: failure()
+        run: |
+          docker compose ps -a
+          docker compose logs --tail=100 credenciais migracoes sistema_gestao nginx
