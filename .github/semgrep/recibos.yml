@@ -1,0 +1,9 @@
+rules:
+  - id: laravel-recibo-enviado-por-get
+    languages: [generic]
+    severity: WARNING
+    message: O controlador de recibos envia e-mail. Exija um POST com proteção CSRF para acionar o envio.
+    pattern-regex: >-
+      (?i)Route::get\s*\(\s*['"][^'"]+['"]\s*,\s*\[\s*SalleController::class\s*,\s*['"]SendEmailRecipt['"]
+    paths:
+      include: ['**/routes/web.php']

@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Analisar código
-        run: semgrep scan --config p/default --config p/security-audit --config p/owasp-top-ten --metrics=off --json --output semgrep.json .
+        run: semgrep scan --config p/default --config p/security-audit --config p/owasp-top-ten --config .github/semgrep/recibos.yml --metrics=off --json --output semgrep.json .
 
       - name: Resumir findings SAST
         id: resultados
@@ -78,6 +78,14 @@ jobs:
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as saida:
               saida.write(resumo)
           PY
+
+      - name: Preservar relatório semgrep
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: semgrep-${{ github.sha }}
+          path: semgrep.json
+          if-no-files-found: error
 
   sca:
     name: SCA - OSV-Scanner
@@ -199,6 +207,32 @@ jobs:
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as saida:
               saida.write(resumo)
           PY
+
+      - name: Registrar inventário completo por dependência e aviso
+        if: ${{ always() }}
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('osv.json').read_text())
+          inventory = []
+          for source in data['results']:
+              for item in source.get('packages', []):
+                  pkg = item['package']
+                  groups = item.get('groups') or [{'ids': [v['id']]} for v in item.get('vulnerabilities', [])]
+                  for group in groups:
+                      if group['ids']:
+                          inventory.append([pkg['name'], pkg['version'], group['ids'][0]])
+          print('INVENTARIO_OSV=' + json.dumps(sorted(inventory)))
+          PY
+
+      - name: Preservar relatório osv
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: osv-${{ github.sha }}
+          path: osv.json
+          if-no-files-found: error
 
   overview:
     name: Overview - resultados
